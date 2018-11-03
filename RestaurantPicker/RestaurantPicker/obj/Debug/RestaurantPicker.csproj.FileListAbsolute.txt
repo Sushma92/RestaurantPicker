@@ -1,0 +1,5 @@
+C:\Users\kcnre\Desktop\CS687\RestaurantPicker\RestaurantPicker\bin\RestaurantPicker.dll
+C:\Users\kcnre\Desktop\CS687\RestaurantPicker\RestaurantPicker\bin\RestaurantPicker.pdb
+C:\Users\kcnre\Desktop\CS687\RestaurantPicker\RestaurantPicker\obj\Debug\RestaurantPicker.csprojResolveAssemblyReference.cache
+C:\Users\kcnre\Desktop\CS687\RestaurantPicker\RestaurantPicker\obj\Debug\RestaurantPicker.dll
+C:\Users\kcnre\Desktop\CS687\RestaurantPicker\RestaurantPicker\obj\Debug\RestaurantPicker.pdb
