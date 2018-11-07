@@ -13,7 +13,7 @@
     <form id="form1" runat="server">
     <div>
         <nav class="navbar navbar-dark bg-dark">
-            <a class="navbar-brand" href="~/Default.aspx">Restaurant Picker</a>
+            <a class="navbar-brand" href="Default.aspx">Restaurant Picker</a>
             <div class="form-inline my-2 my-lg-0">
                 <asp:Button ID="btn_Login" runat="server" Text="Login" CssClass="btn btn-outline-success my-2 my-sm-0" />
             </div>

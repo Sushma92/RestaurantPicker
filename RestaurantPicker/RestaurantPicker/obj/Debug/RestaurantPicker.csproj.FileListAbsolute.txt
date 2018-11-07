@@ -8,3 +8,7 @@ C:\Users\kcnre\Documents\GitHub\RestaurantPicker\RestaurantPicker\RestaurantPick
 C:\Users\kcnre\Documents\GitHub\RestaurantPicker\RestaurantPicker\RestaurantPicker\bin\RestaurantPicker.dll
 C:\Users\kcnre\Documents\GitHub\RestaurantPicker\RestaurantPicker\RestaurantPicker\bin\RestaurantPicker.pdb
 C:\Users\kcnre\Documents\GitHub\RestaurantPicker\RestaurantPicker\RestaurantPicker\obj\Debug\RestaurantPicker.pdb
+C:\Users\kcnre\Documents\GitHub\RestaurantPicker\RestaurantPicker\RestaurantPicker\bin\CIL.dll
+C:\Users\kcnre\Documents\GitHub\RestaurantPicker\RestaurantPicker\RestaurantPicker\bin\DAL.dll
+C:\Users\kcnre\Documents\GitHub\RestaurantPicker\RestaurantPicker\RestaurantPicker\bin\CIL.pdb
+C:\Users\kcnre\Documents\GitHub\RestaurantPicker\RestaurantPicker\RestaurantPicker\bin\DAL.pdb
