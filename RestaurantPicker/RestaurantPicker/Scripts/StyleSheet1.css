@@ -1,0 +1,68 @@
+﻿body{
+    background-image: url(https://image.freepik.com/free-photo/wooden-planks-with-blurred-restaurant-background_1253-56.jpg);
+    
+}
+
+.page-header{
+    
+    width: 30%;
+    border: 5px ;
+    padding: 25px;
+    margin:auto;
+    color:palegoldenrod;
+    text-emphasis:filled;
+    border-style:outset;
+    background-color:rgba(199,21,133,0.7);
+
+}
+#space {
+border-style:ridge;
+    width: 30%;
+    border: 5px ;
+    padding: 10px;
+    margin: auto;
+}
+#nav_bar{
+    border-style:ridge;
+    enable-background:accumulate;
+    color:#e5e8e8;
+    width: 50%;
+    margin:auto;
+    border: 15px ;
+    background-color:rgba(0,0,0,0.5); 
+    padding: 25px;
+    font-family: Source Sans Pro;
+}
+ 
+#Button {
+    border: 10px ;
+}
+h4 {
+    color:#82e0aa;
+    font-weight:900;
+}
+
+#Signup{
+    border-style:ridge;
+    enable-background:accumulate;
+    color:#e5e8e8;
+    width: 50%;
+    margin:auto;
+    border: 15px ;
+    background-color:rgba(0,0,0,0.5); 
+    padding: 25px;
+    font-family: Source Sans Pro;
+}
+
+.Continue {
+    border-style:ridge;
+    enable-background:accumulate;
+    color:#e5e8e8;
+    width: 50%;
+    margin:auto;
+    border: 15px ;
+    border-color:ActiveBorder;
+    background-color:rgba(0,0,0,0.5); 
+    padding: 25px;
+    font-family: Source Sans Pro;
+}
