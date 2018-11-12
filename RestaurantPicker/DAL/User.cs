@@ -3,28 +3,23 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace RestaurantPicker
+namespace DAL
 {
-    public partial class Default : System.Web.UI.Page
+    public class User
     {
-        protected void Page_Load(object sender, EventArgs e)
+        public static DTO.User GetUser(int UserID)
         {
-            //DTO.User user = DAL.User.GetUser(2);
-            //Label1.Text = user.Fname;
-
-            //So for some reason this works fine. but the second i try to move it to the DAL, its not fine
-            DTO.User user = new DTO.User();
+            DTO.User user = null;
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
             {
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;
                     command.CommandText = "SELECT Fname, Lname, Email, Zipcode FROM [User] WHERE UserID = @ID";
-                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = 2;
+                    command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = UserID;
 
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
@@ -35,9 +30,11 @@ namespace RestaurantPicker
                         user.Email = (reader["Email"] != null) ? reader["Email"].ToString() : "";
                         user.Zipcode = (reader["Zipcode"] != null) ? reader["Zipcode"].ToString() : "";
                     }
+
                 }
             }
-            Label1.Text = user.Fname + " " + user.Lname;
+
+            return user;
         }
     }
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="RestaurantPicker.Default" %>
 
 <!DOCTYPE html>
@@ -75,3 +76,11 @@
     </form>            
 </body>
 </html>
+=======
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="RestaurantPicker.Default" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <asp:Label ID="Label1" runat="server" Text="Some text"></asp:Label>
+</asp:Content>
+>>>>>>> e0b67b715e882e8aea1763837bb19347d076fb26
