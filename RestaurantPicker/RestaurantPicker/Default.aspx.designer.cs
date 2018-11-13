@@ -13,26 +13,26 @@ namespace RestaurantPicker {
     public partial class Default {
         
         /// <summary>
-<<<<<<< HEAD
+
 
         /// form control.
 
         /// Label1 control.
 
-=======
+
         /// form control.
->>>>>>> 96d06268ee7c420aee8fd8e1a422fe47f0ba096a
+
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form;
-<<<<<<< HEAD
+
 
         protected global::System.Web.UI.WebControls.Label Label1;
 
-=======
+
         
         /// <summary>
         /// lbl_InputEmail control.
@@ -186,6 +186,6 @@ namespace RestaurantPicker {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_Continue;
->>>>>>> 96d06268ee7c420aee8fd8e1a422fe47f0ba096a
+
     }
 }
