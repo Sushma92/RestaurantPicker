@@ -15,12 +15,17 @@ namespace RestaurantPicker
         {
             DTO.User user = DAL.User.GetUser(2);
             //Label1.Text = user.Fname;
-            
+
         }
 
         protected void btn_Continue_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Restaurant.aspx");
+        }
+
+        protected void btn_Login_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
