@@ -12,7 +12,7 @@ namespace DAL
     {
         public static DTO.User GetUser(int UserID)
         {
-            DTO.User user = null;
+            DTO.User user = new DTO.User();
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
             {
                 using (SqlCommand command = new SqlCommand())
