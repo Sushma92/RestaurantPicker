@@ -20,7 +20,7 @@ namespace RestaurantPicker
 
         protected void btn_Continue_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Restaurant.aspx");
+            Response.Redirect("~/RestaurantSearch.aspx");
         }
 
         protected void btn_Login_Click(object sender, EventArgs e)
