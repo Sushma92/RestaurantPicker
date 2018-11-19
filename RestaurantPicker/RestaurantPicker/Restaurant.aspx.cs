@@ -11,19 +11,26 @@ namespace RestaurantPicker
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            DTO.Restaurant restaurant = DAL.Restaurant.GetRestaurant(1, "10001", "151 W 34th St");
+            if (Session["Restaurant"] != null)
+            {
+                DTO.Restaurant value = Session["Restaurant"] as DTO.Restaurant;
 
-            lbl_RestHeading.Text = restaurant.Rest_Name;
-            lbl_RestRating.Text = "N/A Stars";
-            gv_ratings.EmptyDataText = "Sorry! No reviews have been left for this restaurant yet!\n To leave a review, please login!";
-            gv_ratings.DataSource = null;
-            gv_ratings.DataBind();
+                DTO.Restaurant restaurant = DAL.Restaurant.GetRestaurant(value.Rest_ID, value.ZipCode, value.Street);
+                lbl_RestHeading.Text = restaurant.Rest_Name;
+                lbl_RestRating.Text = (DAL.Rating.GetAvgRating(value.Rest_ID, value.ZipCode, value.Street) == 0) ? "N/A Stars" : DAL.Rating.GetAvgRating(value.Rest_ID, value.ZipCode, value.Street).ToString() + " Stars";
+                Repeater1.DataSource = DAL.Rating.GetAllRatings(value.Rest_ID, value.ZipCode, value.Street);
+                Repeater1.DataBind();
 
-            lbl_Rest_Street.Text = restaurant.Street;
-            lbl_Rest_City.Text = restaurant.City;
-            lbl_Rest_State.Text = restaurant.State;
-            lbl_Rest_Zip.Text = restaurant.ZipCode;
-            
+                lbl_Rest_Street.Text = restaurant.Street;
+                lbl_Rest_City.Text = restaurant.City;
+                lbl_Rest_State.Text = restaurant.State;
+                lbl_Rest_Zip.Text = restaurant.ZipCode;
+
+            }
+            else
+            {
+                Response.Redirect("~/Error.aspx");
+            }
         }
     }
 }

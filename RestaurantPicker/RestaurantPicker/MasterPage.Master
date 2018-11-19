@@ -18,8 +18,13 @@
     <div>
         <nav class="navbar navbar-dark bg-dark">
             <a class="navbar-brand" href="Default.aspx">Restaurant Picker</a>
-            <div class="form-inline my-2 my-lg-0">
-                <asp:Button ID="btn_Login" runat="server" Text="Login" CssClass="btn btn-outline-success my-2 my-sm-0" />
+            <div class="navbar-nav mr-auto">
+                <div class="nav-item">
+                    <a class="nav-link" href="RestaurantSearch.aspx" style="color:white">Search Restaurants</a>
+                </div>
+            </div>
+            <div class="form-inline">
+                <asp:Button ID="btn_Login" runat="server" Text="Login" CssClass="btn btn-outline-success" />
                 <asp:Label ID="lbl_LoginUser" runat="server" Text="" Visible="false"></asp:Label>
                 <a href="UserProfile.aspx" runat="server" id="UserProfileLink" visible="false"></a>
             </div>
