@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+
 namespace RestaurantPicker
 {
     public partial class Default : System.Web.UI.Page
@@ -23,8 +24,21 @@ namespace RestaurantPicker
             Response.Redirect("~/RestaurantSearch.aspx");
         }
 
-        protected void btn_Login_Click(object sender, EventArgs e)
-        {
+        //protected void btn_Login_Click(object sender, EventArgs e)
+        //{
+        //    bool j = DAL.User.default_Login(tb_InputEmail.Text, tb_InputPassword.Text);
+            
+        //    if (j == true)
+        //        Response.Redirect("~/Restaurant.aspx");
+        //    else
+        //        Response.Redirect("~/Default.aspx");
+        //}
+        protected void btn_Login_Click(object sender, EventArgs e) {
+            bool j = DAL.User.default_Login(tb_InputEmail.Text, tb_InputPassword.Text);
+            if (j == true)
+                Response.Redirect("~/Restaurant.aspx");
+            else
+                Response.Redirect("~/Default.aspx");
 
         }
     }

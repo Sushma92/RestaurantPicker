@@ -36,5 +36,36 @@ namespace DAL
 
             return user;
         }
+
+        public static bool default_Login(string tb_InputEmail, string tb_InputPassword)
+        {
+
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
+            {
+                using (SqlCommand comm = new SqlCommand())
+                {
+                    comm.Connection = con;
+                    comm.CommandText = "SELECT PasswordHash FROM [User] WHERE Email = @tb_InputEmail";
+                    //comm.Parameters.Add("@Email", System.Data.SqlDbType.).Value = tb_InputEmail;
+                    
+                    con.Open();
+                    SqlDataReader reader = comm.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        if (tb_InputPassword.GetHashCode().CompareTo(reader.GetString(12)) == 1)
+                            return true;
+                        else
+                            return false;
+                    }
+
+                }
+            }
+
+            return false;
+
+
+        }
+
+
     }
 }
