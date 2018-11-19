@@ -83,7 +83,7 @@
                         <FooterTemplate>
                             <asp:Label ID="defaultItem" runat="server" 
                                 Visible='<%# Repeater1.Items.Count == 0 %>' Text="Sorry! No reviews have been left for this restaurant yet!\n" />
-                            <asp:Button ID="btn_Home" runat="server" Visible='<%# %>' Text="Click here to log in!" />
+                            <asp:Button ID="btn_Home" runat="server" Text="Click here to log in!" />
                         </FooterTemplate>
                     </asp:Repeater>
                 </div>

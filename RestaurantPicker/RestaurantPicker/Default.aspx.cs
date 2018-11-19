@@ -24,22 +24,13 @@ namespace RestaurantPicker
             Response.Redirect("~/RestaurantSearch.aspx");
         }
 
-        //protected void btn_Login_Click(object sender, EventArgs e)
-        //{
-        //    bool j = DAL.User.default_Login(tb_InputEmail.Text, tb_InputPassword.Text);
-            
-        //    if (j == true)
-        //        Response.Redirect("~/Restaurant.aspx");
-        //    else
-        //        Response.Redirect("~/Default.aspx");
-        //}
-        protected void btn_Login_Click(object sender, EventArgs e) {
+        protected void btn_Login_Click(object sender, EventArgs e)
+        {
             bool j = DAL.User.default_Login(tb_InputEmail.Text, tb_InputPassword.Text);
-            if (j == true)
-                Response.Redirect("~/Restaurant.aspx");
+            if (j)
+                Response.Redirect("~/RestaurantSearch.aspx");
             else
                 Response.Redirect("~/Default.aspx");
-
         }
     }
 }

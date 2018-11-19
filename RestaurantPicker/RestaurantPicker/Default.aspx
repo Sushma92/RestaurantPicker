@@ -19,8 +19,8 @@
                     <asp:TextBox ID="tb_InputPassword" runat="server" CssClass="form-control" placeholder="Enter Password"></asp:TextBox>
                 </div>
                 <div class="col-md-2 justify-content-center align-self-end">
-                    <%--<asp:Button ID="btn_Login" type="submit" runat ="server" CssClass="btn btn-info" Text="Log In" OnClick="btn_Login_Click"></asp:Button>--%>
-                    <asp:Button ID="btn_Login" type="submit" runat="server" CssClass="btn btn-info" Text="Log In" OnClick="btn_Login_Click" ></asp:Button>
+                    <asp:Button ID="btn_Login" runat="server" Text="Login" CssClass="btn btn-info" OnClick="btn_Login_Click" />
+                    
                 </div>                    
                 </div>
         </nav>

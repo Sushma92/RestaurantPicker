@@ -45,14 +45,15 @@ namespace DAL
                 using (SqlCommand comm = new SqlCommand())
                 {
                     comm.Connection = con;
-                    comm.CommandText = "SELECT PasswordHash FROM [User] WHERE Email = @tb_InputEmail";
-                    //comm.Parameters.Add("@Email", System.Data.SqlDbType.).Value = tb_InputEmail;
+                    comm.CommandText = "SELECT PasswordHash FROM [User] WHERE Email = @Email";
+                    comm.Parameters.Add("@Email", System.Data.SqlDbType.NVarChar).Value = tb_InputEmail;
                     
                     con.Open();
                     SqlDataReader reader = comm.ExecuteReader();
                     if (reader.Read())
                     {
-                        if (tb_InputPassword.GetHashCode().CompareTo(reader.GetString(12)) == 1)
+                        //if (tb_InputPassword.GetHashCode().CompareTo(reader["PasswordHash"].ToString()) == 1)
+                        if(Tools.Security.MD5Hash(tb_InputPassword) == reader["PasswordHash"].ToString())
                             return true;
                         else
                             return false;
