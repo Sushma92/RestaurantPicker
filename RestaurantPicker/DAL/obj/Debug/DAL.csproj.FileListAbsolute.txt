@@ -12,3 +12,5 @@ C:\Users\nutha\OneDrive\Documents\GitHub\RestaurantPicker\RestaurantPicker\DAL\b
 C:\Users\nutha\OneDrive\Documents\GitHub\RestaurantPicker\RestaurantPicker\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
 C:\Users\nutha\OneDrive\Documents\GitHub\RestaurantPicker\RestaurantPicker\DAL\obj\Debug\DAL.dll
 C:\Users\nutha\OneDrive\Documents\GitHub\RestaurantPicker\RestaurantPicker\DAL\obj\Debug\DAL.pdb
+C:\Users\kcnre\Documents\GitHub\RestaurantPicker\RestaurantPicker\DAL\bin\Debug\Tools.dll
+C:\Users\kcnre\Documents\GitHub\RestaurantPicker\RestaurantPicker\DAL\bin\Debug\Tools.pdb

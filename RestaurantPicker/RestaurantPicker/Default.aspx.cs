@@ -28,7 +28,10 @@ namespace RestaurantPicker
         {
             bool j = DAL.User.default_Login(tb_InputEmail.Text, tb_InputPassword.Text);
             if (j)
+            {
+                Session["CurrentUser"] = DAL.User.GetUser(tb_InputEmail.Text);
                 Response.Redirect("~/RestaurantSearch.aspx");
+            }
             else
                 Response.Redirect("~/Default.aspx");
         }

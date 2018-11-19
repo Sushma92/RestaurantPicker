@@ -1,6 +1,5 @@
 C:\Users\kcnre\Documents\GitHub\RestaurantPicker\RestaurantPicker\CIL\bin\Debug\CIL.dll
 C:\Users\kcnre\Documents\GitHub\RestaurantPicker\RestaurantPicker\CIL\bin\Debug\CIL.pdb
-C:\Users\kcnre\Documents\GitHub\RestaurantPicker\RestaurantPicker\CIL\obj\Debug\DTO.csprojResolveAssemblyReference.cache
 C:\Users\kcnre\Documents\GitHub\RestaurantPicker\RestaurantPicker\CIL\obj\Debug\CIL.dll
 C:\Users\kcnre\Documents\GitHub\RestaurantPicker\RestaurantPicker\CIL\obj\Debug\CIL.pdb
 C:\Users\nutha\OneDrive\Documents\GitHub\RestaurantPicker\RestaurantPicker\CIL\bin\Debug\CIL.dll

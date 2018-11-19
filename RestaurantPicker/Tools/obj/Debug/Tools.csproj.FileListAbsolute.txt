@@ -1,0 +1,7 @@
+C:\Users\kcnre\Documents\GitHub\RestaurantPicker\RestaurantPicker\Tools\bin\Debug\Tools.dll
+C:\Users\kcnre\Documents\GitHub\RestaurantPicker\RestaurantPicker\Tools\bin\Debug\Tools.pdb
+C:\Users\kcnre\Documents\GitHub\RestaurantPicker\RestaurantPicker\Tools\bin\Debug\CIL.dll
+C:\Users\kcnre\Documents\GitHub\RestaurantPicker\RestaurantPicker\Tools\bin\Debug\CIL.pdb
+C:\Users\kcnre\Documents\GitHub\RestaurantPicker\RestaurantPicker\Tools\obj\Debug\Tools.dll
+C:\Users\kcnre\Documents\GitHub\RestaurantPicker\RestaurantPicker\Tools\obj\Debug\Tools.pdb
+C:\Users\kcnre\Documents\GitHub\RestaurantPicker\RestaurantPicker\Tools\obj\Debug\Tools.csprojResolveAssemblyReference.cache
