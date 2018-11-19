@@ -73,7 +73,7 @@ namespace DAL
                     comm.Connection = con;
                     comm.CommandText = "SELECT PasswordHash FROM [User] WHERE Email = @Email";
                     comm.Parameters.Add("@Email", System.Data.SqlDbType.NVarChar).Value = tb_InputEmail;
-                    
+
                     con.Open();
                     SqlDataReader reader = comm.ExecuteReader();
                     if (reader.Read())
@@ -93,6 +93,70 @@ namespace DAL
 
         }
 
+        public static DTO.User Register(string Fname, string Lname, string Email, string Password1, string Password2)
+        {
+            DTO.User user = new DTO.User();
+            user.Fname = "";
+            user.Lname = "";
+            user.Email = "";
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
+            {
+                conn.Open();
 
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.CommandText = "Select Fname, Lname, Email from [User] where Email = @Email";
+                    cmd.Parameters.Add("@Email", System.Data.SqlDbType.NVarChar).Value = Email;
+                    cmd.Connection = conn;
+                    SqlDataReader rd = cmd.ExecuteReader();
+                    if (rd.Read())
+                    {
+                        if (rd.HasRows)
+                        {
+                            user.Fname = rd["Fname"].ToString();
+                            user.Lname = rd["Lname"].ToString();
+                            user.Email = rd["Email"].ToString();
+                            return user;
+                        }
+                        else
+                        {
+
+                            cmd.Connection = conn;
+                            string pass = Tools.Security.MD5Hash(Password1);
+
+                            cmd.CommandText = "insert into [User] (Fname,Lname, Email, PasswordHash) values (@Fname,@Lname, @Email, @PasswordHash)";
+                            cmd.Parameters.Add("@Fname", System.Data.SqlDbType.NVarChar).Value = Fname;
+                            cmd.Parameters.Add("@Lname", System.Data.SqlDbType.NVarChar).Value = Lname;
+                            //cmd.Parameters.Add("@Email", System.Data.SqlDbType.NVarChar).Value = Email;
+                            cmd.Parameters.Add("@PasswordHash", System.Data.SqlDbType.Char).Value = pass;//Password1;
+
+                            rd.Close();
+                            rd = cmd.ExecuteReader();
+                            if (rd.Read())
+                            {
+                                user.Fname = rd["Fname"].ToString();
+                                user.Lname = rd["Lname"].ToString();
+                                user.Email = rd["Email"].ToString();
+
+                                return user;
+                            }
+
+                        }
+
+                        conn.Close();
+
+                    }
+                    return user;
+                }
+
+
+            }
+        }
     }
 }
+        
+        
+            
+                
+            
+

@@ -35,5 +35,16 @@ namespace RestaurantPicker
             else
                 Response.Redirect("~/Default.aspx");
         }
+
+        protected void btn_Register_Click(object sender, EventArgs e)
+        {
+            if (tb_Fname.Text == "" || tb_Lname.Text == "" || tb_Email.Text == "" || tb_Password1.Text == "" || tb_Password2.Text == "")
+                Console.Write("Please enter all the fields");
+
+            else if (tb_Password1.Text != tb_Password2.Text)
+               Console.Write("The password does not match");
+            else
+                DAL.User.Register(tb_Fname.Text, tb_Lname.Text, tb_Email.Text, tb_Password1.Text, tb_Password2.Text);
+        }
     }
 }
