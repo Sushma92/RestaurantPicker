@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    class FavFood
+    public class FavFood
     {
-        public Int32 UserID { get; set; }
-        public Int32 FoodID { get; set; }
+        public Int32 User_ID { get; set; }
+        public Int32 Food_ID { get; set; }
         public Int32 Rest_ID { get; set; }
         public String ZipCode { get; set; }
         public String Street { get; set; }
