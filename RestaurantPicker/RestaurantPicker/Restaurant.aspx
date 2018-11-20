@@ -68,7 +68,8 @@
                 <div class="card-header">
                     <span>
                         <asp:Label ID="Label5" runat="server" Text="Restaurant Reviews" Font-Size="X-Large"></asp:Label>
-                        <asp:Button ID="btn_Review" runat="server" class="btn btn-danger float-right" OnClick="btn_Review_Click" />
+                        <asp:Button ID="btn_Review" runat="server" CssClass="btn btn-danger float-right" OnClick="btn_Review_Click" Text="Leave a Review!" />
+                        <asp:Button ID="btn_HomepageRedirect" runat="server" CssClass="btn btn-danger float-right" Text="Log In Or Create Account" OnClick="btn_HomepageRedirect_Click" Visible="false" />
                     </span>
                 </div>
                 <div class="card-body">

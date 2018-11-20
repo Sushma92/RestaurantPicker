@@ -33,11 +33,22 @@ namespace RestaurantPicker
 
                     if (Session["CurrentUser"] != null)
                     {
-                        btn_Review.Text = "Leave a Review!";
+                        DTO.Rating rating = new DTO.Rating();
+                        rating.Rest_ID = value.Rest_ID;
+                        rating.ZipCode = value.ZipCode;
+                        rating.Street = value.Street;
+                        rating.UserID = Convert.ToInt32(((DTO.User)Session["CurrentUser"]).UserID);
+                        if (DAL.Rating.HasUserReviewed(rating))
+                            btn_Review.Visible = false;
+                        else
+                            btn_Review.Visible = true;
+
+                        btn_HomepageRedirect.Visible = false;
                     }
                     else
                     {
-                        btn_Review.Text = "Login to Leave a Review";
+                        btn_HomepageRedirect.Visible = true;
+                        btn_Review.Visible = false;
                     }
                 }
                 else
@@ -69,6 +80,11 @@ namespace RestaurantPicker
                 Page.Response.Redirect(Page.Request.Url.ToString(), true);
             }
                 
+        }
+
+        protected void btn_HomepageRedirect_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Default.aspx");
         }
     }
 }

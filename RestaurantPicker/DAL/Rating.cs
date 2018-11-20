@@ -89,6 +89,55 @@ namespace DAL
             return true;
         }
 
+        public static bool HasUserReviewed(DTO.Rating rating)
+        {
+            bool HasReviewed = false;
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandText = "SELECT User_ID FROM Rating WHERE Rest_ID = @RestID AND Street = @Street AND User_ID = @UserID AND ZipCode = @ZipCode";
+                    command.Parameters.Add("@UserID", SqlDbType.Int).Value = rating.UserID;
+                    command.Parameters.Add("@RestID", SqlDbType.Int).Value = rating.Rest_ID;
+                    command.Parameters.Add("@ZipCode", SqlDbType.NVarChar).Value = rating.ZipCode;
+                    command.Parameters.Add("@Street", SqlDbType.NVarChar).Value = rating.Street;
+
+                    connection.Open();
+                    var result = command.ExecuteScalar();
+                    if (result != null)
+                        HasReviewed = true;
+                    else
+                        HasReviewed = false;
+                }
+            }
+            return HasReviewed;
+        }
+
+        public static DataTable GetUserRatings(Int32 user_id)//, string zipcode, string street)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandText = "SELECT DISTINCT Rating, Review, Rating.Street, Rating.ZipCode, Rest_Name FROM Rating FULL JOIN [Restaurant_Branch] ON Restaurant_Branch.Rest_ID = Rating.Rest_ID FULL JOIN Main_Restaurant ON Restaurant_Branch.Rest_ID = Main_Restaurant.Rest_ID WHERE User_ID = @UserID";
+                    command.Parameters.Add("@UserID", SqlDbType.Int).Value = user_id;
+                    //command.Parameters.Add("@Zip", SqlDbType.NVarChar).Value = zipcode;
+                    //command.Parameters.Add("@Street", SqlDbType.NVarChar).Value = street;
+
+                    connection.Open();
+                    using (SqlDataAdapter adapter = new SqlDataAdapter())
+                    {
+                        adapter.SelectCommand = command;
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+
+            return dt;
+        }
         //public static DataTable GetUserRatings() {
 
         //}

@@ -65,6 +65,33 @@ namespace DAL
             return user;
         }
 
+        public static bool UpdateUser(DTO.User user)
+        {
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandText = "UPDATE [User] SET Fname = @Fname, Lname = @Lname, Email = @Email, Zipcode = @Zipcode WHERE UserID = @UserID";
+                    command.Parameters.Add("@UserID", System.Data.SqlDbType.Int).Value = user.UserID;
+                    command.Parameters.Add("@Fname", System.Data.SqlDbType.NVarChar).Value = user.Fname;
+                    command.Parameters.Add("@Lname", System.Data.SqlDbType.NVarChar).Value = user.Lname;
+                    command.Parameters.Add("@Email", System.Data.SqlDbType.NVarChar).Value = user.Email;
+                    command.Parameters.Add("@ZipCode", System.Data.SqlDbType.NVarChar).Value = user.Zipcode;
+                    connection.Open();
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Unable to update user");
+                    }
+                }
+            }
+            return true;
+        }
+
         public static bool default_Login(string tb_InputEmail, string tb_InputPassword)
         {
 
@@ -150,21 +177,8 @@ namespace DAL
                     }
                     return user;
                 }
-
-
             }
         }
-
-        
-
-
-
-
-
-
-
-
-
     }
 }
         
