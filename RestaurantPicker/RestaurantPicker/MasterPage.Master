@@ -28,7 +28,7 @@
                 <div class="nav-item dropdown">
                     <a id="a_UserProfile" runat="server" style="color:white" visible="false" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                     <div class="dropdown-menu dropdown-menu-right bg-dark" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="UserProfile.aspx" style="color:white; align-content:center">My Profile</a>
+                        <a class="dropdown-item" href="UserProfile.aspx" style="color:orangered; align-content:center">My Profile</a>
                         <div class="dropdown-divider"></div>
                         <asp:Button ID="btn_LogOut" runat="server" Text="Log out" CssClass="btn btn-secondary" OnClick="btn_LogOut_Click" />
                     </div>
