@@ -59,5 +59,9 @@ namespace DAL
             }
             return rating;
         }
+
+        //public static DataTable GetUserRatings() {
+
+        //}
     }
 }

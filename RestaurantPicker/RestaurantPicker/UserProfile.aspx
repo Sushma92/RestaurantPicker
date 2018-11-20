@@ -63,6 +63,21 @@
         </div>
         <div class="tab-pane fade" id="friends" role="tabpanel" aria-labelledby="FriendsList">!...</div>
         <div class="tab-pane fade" id="favorites" role="tabpanel" aria-labelledby="Favorites">?...</div>
-        <div class="tab-pane fade" id="ratings" role="tabpanel" aria-labelledby="Ratings">pp...</div>
+        <div class="tab-pane fade" id="ratings" role="tabpanel" aria-labelledby="Ratings">            
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Restaurant Name</th>
+                  <th scope="col">Rating</th>
+                  <th scope="col">Review</th>
+                  <th scope="col">Address</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+              </tbody>
+            </table>
+
+        </div>
     </div>
 </asp:Content>
