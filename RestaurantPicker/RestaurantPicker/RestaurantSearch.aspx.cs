@@ -70,6 +70,7 @@ namespace RestaurantPicker
             tb_Street.Text = "";
             tb_ZipCode.Text = "";
             gv_Restaurants.DataSource = DAL.Restaurant.GetAllRestaurants();
+            gv_Restaurants.DataBind();
         }
 
         protected void gv_Restaurants_RowCommand(object sender, GridViewCommandEventArgs e)

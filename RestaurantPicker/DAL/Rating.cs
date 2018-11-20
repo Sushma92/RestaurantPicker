@@ -124,8 +124,6 @@ namespace DAL
                     command.Connection = connection;
                     command.CommandText = "SELECT DISTINCT Rating, Review, Rating.Street, Rating.ZipCode, Rest_Name FROM Rating FULL JOIN [Restaurant_Branch] ON Restaurant_Branch.Rest_ID = Rating.Rest_ID FULL JOIN Main_Restaurant ON Restaurant_Branch.Rest_ID = Main_Restaurant.Rest_ID WHERE User_ID = @UserID";
                     command.Parameters.Add("@UserID", SqlDbType.Int).Value = user_id;
-                    //command.Parameters.Add("@Zip", SqlDbType.NVarChar).Value = zipcode;
-                    //command.Parameters.Add("@Street", SqlDbType.NVarChar).Value = street;
 
                     connection.Open();
                     using (SqlDataAdapter adapter = new SqlDataAdapter())

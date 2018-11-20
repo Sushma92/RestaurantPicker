@@ -4,34 +4,40 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <br />
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    <div class="container-fluid">
-
-    </div>
     <div class="row">
         <div class="col-md-12">
             <asp:Label ID="lbl_Greeting" runat="server" Text="Welcome," CssClass="col-md-2 offset-md-1 col-form-label" Font-Size="Large"></asp:Label>
-            
         </div>
     </div>
-    <div class="panel col-md-10 offset-md-1">
-        <ul class="nav nav-tabs" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="UserProfile" data-toggle="tab" href="#user" aria-controls="user" aria-selected="true">User Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="FriendsList" data-toggle="tab" href="#friends" aria-controls="friends" aria-selected="false">Friends List</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="Favorites" data-toggle="tab" href="#favorites" aria-controls="favorites" aria-selected="false">Favorites</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="Ratings" data-toggle="tab" href="#ratings" aria-controls="ratings" aria-selected="false">Ratings/Reviews</a>
-          </li>
-        </ul>
+    <div class="row">
+        <div class="col-md-12">
+                        <asp:Label ID="lbl_Staus" runat="server" Text="" Visible ="false"></asp:Label>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="panel col-md-10 offset-md-1">
+            <ul class="nav nav-tabs" role="tablist" id="profiletabs">
+              <li class="nav-item">
+                <a class="nav-link active" id="UserProfile" data-toggle="tab" href="#user" aria-controls="user" aria-selected="true">User Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" runat="server" id="FSearch" data-toggle="tab" href="#friendsearch" aria-controls="friendsearch" aria-selected="false">Search for Friends</a>
+              </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="FList" data-toggle="tab" href="#friendslist" aria-controls="friendslist" aria-selected="false">Friend List</a>
+                </li>
+              <li class="nav-item">
+                <a class="nav-link" id="Favorites" data-toggle="tab" href="#favorites" aria-controls="favorites" aria-selected="false">Favorites</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="Ratings" data-toggle="tab" href="#ratings" aria-controls="ratings" aria-selected="false">Ratings/Reviews</a>
+              </li>
+            </ul>
+        </div>
     </div>
     <div class="tab-content col-md-10 offset-md-1" id="tabContent">
         <div class="tab-pane fade show active" id="user" role="tabpanel" aria-labelledby="UserProfile">
-                            <asp:Button ID="btn_Edit" runat="server" Text="Edit Profile" CssClass="btn btn-info offset-md-7" OnClick="btn_Edit_Click" />
+            <asp:Button ID="btn_Edit" runat="server" Text="Edit Profile" CssClass="btn btn-info offset-md-7" OnClick="btn_Edit_Click" />
             <div class="row">
                 <div class="col-md-12">
                     <div class="input-group">
@@ -65,7 +71,106 @@
                 </div>
             </div>
         </div>
-        <div class="tab-pane fade" id="friends" role="tabpanel" aria-labelledby="FriendsList">!...</div>
+        <div class="tab-pane fade" id="friendsearch" role="tabpanel" aria-labelledby="FSearch">
+            <br />
+            <div class="col-md-10 offset-md-1">
+                <div class="card">
+                    <div class="card-header">Search for Friends</div>
+                    <div class="card-body">
+                        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                            <ContentTemplate>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <asp:Label ID="lbl_FriendFname" runat="server" AssociatedControlID="tb_FriendFname" CssClass="form-control" Text="First Name"></asp:Label>
+                                            <asp:TextBox ID="tb_FriendFname" runat="server" CssClass="form-control" MaxLength="25"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <asp:Label ID="lbl_City" runat="server" AssociatedControlID="tb_FriendLname" CssClass="form-control" Text="Last Name"></asp:Label>
+                                            <asp:TextBox ID="tb_FriendLname" runat="server" CssClass="form-control" MaxLength="25"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <asp:Label ID="lbl_FriendZipCode" runat="server" AssociatedControlID="tb_FriendZipCode" CssClass="form-control" Text="Zip Code"></asp:Label>
+                                            <asp:TextBox ID="tb_FriendZipCode" runat="server" CssClass="form-control" MaxLength="5" ></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <asp:Label ID="lbl_FriendEmail" runat="server" AssociatedControlID="tb_FriendEmail" CssClass="form-control" Text="Email"></asp:Label>
+                                            <asp:TextBox ID="tb_FriendEmail" runat="server" CssClass="form-control" MaxLength="75"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+                             </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </div>
+                    <div class="card-footer">
+                        <asp:Button ID="btn_SearchFriends" runat="server" Text="Search" CssClass="btn btn-success" OnClick="btn_SearchFriends_Click" />
+                        <asp:Button ID="btn_ResetFriends" runat="server" Text="Reset" CssClass="btn btn-danger" OnClick="btn_ResetFriends_Click" />
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="col-md-10 offset-md-1">
+                <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                    <ContentTemplate>
+                        <asp:GridView ID="gv_FriendSearch" CssClass="table table-striped" runat="server" AutoGenerateColumns="false" 
+                            OnRowCommand="gv_FriendSearch_RowCommand" DataKeyNames="UserID"
+                             AllowPaging="true" PageSize="5" OnPageIndexChanging="gv_FriendSearch_PageIndexChanging">
+                        <Columns>
+                            <asp:BoundField HeaderText="First Name" DataField="Fname" />
+                            <asp:BoundField HeaderText="Last Name" DataField="Lname" />
+                            <asp:BoundField HeaderText="Email" DataField="Email" />
+                            <asp:BoundField HeaderText="Zip Code" DataField="ZipCode" />
+                            <asp:ButtonField CommandName="Add" Text="Add user as friend" />
+                        </Columns>
+                        <EmptyDataTemplate>
+                            Sorry! No friends found :(
+                        </EmptyDataTemplate>
+                    </asp:GridView>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+                
+            </div>
+        </div>
+        <div class="tab-pane fade" id="friendslist" role="tabpanel" aria-labelledby="FList">
+            <br />
+            <div class="col-md-10 offset-md-1">
+                <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+                    <ContentTemplate>
+                        <asp:GridView ID="gv_FriendList" runat="server" AutoGenerateColumns="false" CssClass="table table-striped" 
+                            HeaderStyle-CssClass="thead-light" DataKeyNames="UserID" OnRowCommand="gv_FriendList_RowCommand">
+                            <Columns>
+                                <asp:BoundField DataField="Fname" HeaderText="Restaurant Name" />
+                                <asp:BoundField DataField="Lname" HeaderText="Rating" />
+                                <asp:BoundField DataField="Email" HeaderText="Review" />
+                                <asp:BoundField DataField="ZipCode" HeaderText="Zip Code" />
+                                <asp:ButtonField CommandName="Go" Text="Go to Friend's Page" />
+                                <asp:TemplateField>
+                                    <ItemTemplate>
+                                        <a runat="server" id="friendPageLink"></a>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                            <EmptyDataTemplate>
+                                This user has not made any friends yet!.
+                            </EmptyDataTemplate>
+                        </asp:GridView>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+                
+            </div>
+        </div>
         <div class="tab-pane fade" id="favorites" role="tabpanel" aria-labelledby="Favorites">
             <table class="table">
               <thead class="thead-light">
@@ -78,29 +183,23 @@
               </thead>
            </table>
         </div>
-        <div class="tab-pane fade" id="ratings" role="tabpanel" aria-labelledby="Ratings">  
-            <asp:GridView ID="gv_UserRatings" runat="server" AutoGenerateColumns="false" CssClass="table table-striped">
-                <Columns>
-                    <asp:BoundField DataField="Rest_Name" HeaderText="Restaurant Name" />
-                    <asp:BoundField DataField="Rating" HeaderText="Rating" />
-                    <asp:BoundField DataField="Review" HeaderText="Review" />
-                    <asp:BoundField DataField="Street" HeaderText="Street" />
-                    <asp:BoundField DataField="ZipCode" HeaderText="Zip Code" />
-                </Columns>
-            </asp:GridView>          
-            <%--<table class="table">
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col">Restaurant Name</th>
-                  <th scope="col">Rating</th>
-                  <th scope="col">Review</th>
-                  <th scope="col">Street</th>
-                  <th scope="col">Zipcode</th>
-                </tr>
-              </thead>
-              
-            </table>--%>
-
+        <div class="tab-pane fade" id="ratings" role="tabpanel" aria-labelledby="Ratings">
+            <br /> 
+            <div class="col-md-10 offset-md-1">
+                <asp:GridView ID="gv_UserRatings" runat="server" AutoGenerateColumns="false" CssClass="table table-striped" 
+                    HeaderStyle-CssClass="thead-light">
+                    <Columns>
+                        <asp:BoundField DataField="Rest_Name" HeaderText="Restaurant Name" />
+                        <asp:BoundField DataField="Rating" HeaderText="Rating" />
+                        <asp:BoundField DataField="Review" HeaderText="Review" />
+                        <asp:BoundField DataField="Street" HeaderText="Street" />
+                        <asp:BoundField DataField="ZipCode" HeaderText="Zip Code" />
+                    </Columns>
+                    <EmptyDataTemplate>
+                        This user has not left any reviews yet. Check back later!
+                    </EmptyDataTemplate>
+                </asp:GridView>          
+            </div>
         </div>
     </div>
     <div class="modal fade" id="EditModal" role="dialog" aria-labelledby="EditModalLabel" aria-hidden="true">
@@ -146,6 +245,20 @@
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>
+        <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+            <ContentTemplate>
+                <asp:HiddenField ID="HiddenValue" runat="server" Value="0"></asp:HiddenField>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+        
     </div>
+    <script>
+        $('#profiletabs a[href="' + $("#<%= HiddenValue.ClientID %>").val() + '"]').tab('show');
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            var target = $(e.target).attr("href") // activated tab
+            $("#<%= HiddenValue.ClientID %>").val(target)
+            var hidden = $("#<%= HiddenValue.ClientID %>").val();
+        });
 
+    </script>
 </asp:Content>

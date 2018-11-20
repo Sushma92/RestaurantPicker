@@ -53,9 +53,16 @@ namespace DAL
                     if(filters[4] != "")
                         strFilter += "Street LIKE '%' + @Street + '%' AND ";
 
-                    strFilter = strFilter.Substring(0, strFilter.Length - 5);
-
-                    command.CommandText = sqlString + " WHERE " + strFilter;
+                    if (strFilter.Length != 0)
+                    {
+                        strFilter = strFilter.Substring(0, strFilter.Length - 5);
+                        command.CommandText = sqlString + " WHERE " + strFilter;
+                    }
+                    else
+                    {
+                        command.CommandText = sqlString;
+                    }
+                    
                     command.Parameters.Add("@Name", System.Data.SqlDbType.NVarChar).Value = filters[0];
                     command.Parameters.Add("@City", System.Data.SqlDbType.NVarChar).Value = filters[1];
                     command.Parameters.Add("@State", System.Data.SqlDbType.NVarChar).Value = filters[2];

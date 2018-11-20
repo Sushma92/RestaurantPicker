@@ -16,6 +16,7 @@ namespace RestaurantPicker
                 DTO.User user = (DTO.User)Session["CurrentUser"];
                 a_UserProfile.Visible = true;
                 a_UserProfile.InnerText = "Welcome Back, " + user.Fname + "!";
+                profileLink.HRef = String.Format("UserProfile.aspx?id={0}", user.UserID);
             }
             else
             {

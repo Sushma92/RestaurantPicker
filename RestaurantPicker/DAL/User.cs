@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -63,6 +64,114 @@ namespace DAL
                 }
             }
             return user;
+        }
+
+        public static bool AddFriend(Int32 friendID, Int32 userID)
+        {
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandText = "INSERT INTO Friends (User_ID, FUser_ID) VALUES (@UserID, @FriendID)";
+                    command.Parameters.Add("@UserID", SqlDbType.Int).Value = userID;
+                    command.Parameters.Add("@FriendID", SqlDbType.NVarChar).Value = friendID;
+
+                    connection.Open();
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Unable to add friend");
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        public static DataTable GetAllUsers(Int32 currentuser)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandText = "SELECT UserID, Fname, Lname, Email, ZipCode FROM [User] WHERE UserID != @CurrentUser";
+                    command.Parameters.Add("@CurrentUser", SqlDbType.Int).Value = currentuser;
+
+                    connection.Open();
+                    using (SqlDataAdapter adapter = new SqlDataAdapter())
+                    {
+                        adapter.SelectCommand = command;
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+            return dt;
+        }
+
+        public static DataTable GetAllUsers(Int32 currentuser,List<String> filters)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+                    String sqlString = "SELECT UserID, Fname, Lname, Email, ZipCode FROM [User]";
+                    String strFilter = "";
+                    if (filters[0] != "")
+                        strFilter += "Fname LIKE '%' + @Fname + '%' AND ";
+                    if (filters[1] != "")
+                        strFilter += "Lname LIKE '%' + @Lname + '%' AND ";
+                    if (filters[2] != "")
+                        strFilter += "Email LIKE '%' + @Email + '%' AND ";
+                    if (filters[3] != "")
+                        strFilter += "ZipCode = @ZipCode AND ";
+
+                    if (strFilter.Length != 0)
+                    {
+                        strFilter = strFilter.Substring(0, strFilter.Length - 5);
+
+                        command.CommandText = sqlString + " WHERE " + strFilter + "AND UserID != @CurrentUser";
+                    }
+                    else
+                    {
+                        command.CommandText = sqlString + "WHERE UserID != @CurrentUser";
+                    }
+                    command.Parameters.Add("@Fname", System.Data.SqlDbType.NVarChar).Value = filters[0];
+                    command.Parameters.Add("@Lname", System.Data.SqlDbType.NVarChar).Value = filters[1];
+                    command.Parameters.Add("@Email", System.Data.SqlDbType.NVarChar).Value = filters[2];
+                    command.Parameters.Add("@ZipCode", System.Data.SqlDbType.NVarChar).Value = filters[3];
+                    command.Parameters.Add("@CurrentUser", SqlDbType.Int).Value = currentuser;
+                }
+                return dt;
+            }
+        }
+
+        public static DataTable GetAllUsersFriends(Int32 userID)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandText = "SELECT * From [User] WHERE UserID = ANY (SELECT FUser_ID From Friends WHERE User_ID = @UserID);";
+                    command.Parameters.Add("@UserID", System.Data.SqlDbType.Int).Value = userID;
+                    connection.Open();
+                    using (SqlDataAdapter adapter = new SqlDataAdapter())
+                    {
+                        adapter.SelectCommand = command;
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+            return dt;
         }
 
         public static bool UpdateUser(DTO.User user)
