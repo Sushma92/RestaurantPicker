@@ -71,6 +71,20 @@ namespace RestaurantPicker
 
                 gv_FriendList.DataSource = DAL.User.GetAllUsersFriends(userID);
                 gv_FriendList.DataBind();
+
+                gv_Favorites.DataSource = DAL.FavFood.GetUserFavFood(userID);
+                gv_Favorites.DataBind();
+
+                ddl_FoodOptions.DataSource = DAL.FavFood.GetAllFoods();
+                ddl_FoodOptions.DataTextField = "Name";
+                ddl_FoodOptions.DataValueField = "Food_ID";
+                ddl_FoodOptions.DataBind();
+
+                ddl_Restaurants.DataSource = DAL.Restaurant.GetDistinctRestaurants();
+                ddl_Restaurants.DataTextField = "Rest_Name";
+                ddl_Restaurants.DataValueField = "Rest_ID";
+                ddl_Restaurants.DataBind();
+
                 lbl_Staus.Visible = false;
             }
             
@@ -140,7 +154,6 @@ namespace RestaurantPicker
             {
                 filters[3] = tb_FriendZipCode.Text;
             }
-
             return filters;
         }
 
@@ -176,6 +189,51 @@ namespace RestaurantPicker
                 Response.Redirect(String.Format("~/UserProfile.aspx?id={0}", friendID));
             }
             
+        }
+
+        protected void btn_AddFaveFood_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "FaveFoodModal", "$('#FaveFoodModal').modal();", true);
+        }
+
+        protected void btn_AddFavoriteFood_Click(object sender, EventArgs e)
+        {
+            DTO.FavFood food = new DTO.FavFood();
+            food.Food_ID = Convert.ToInt32(ddl_FoodOptions.SelectedValue);
+            if(Convert.ToInt32(ddl_Restaurants.SelectedValue) != 0)
+            {
+                food.Rest_ID = Convert.ToInt32(ddl_Restaurants.SelectedValue);
+            }
+            food.User_ID = ((DTO.User)Session["CurrentUser"]).UserID;
+
+            if (DAL.FavFood.SubmitFavFood(food))
+            {
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "FaveFoodModal", "$('#FaveFoodModal').modal('hide');", true);
+                Page.Response.Redirect(Page.Request.Url.ToString(), true);
+            }
+        }
+
+        protected void gv_Favorites_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gv_Favorites.DataSource = DAL.FavFood.GetUserFavFood(((DTO.User)Session["CurrentUser"]).UserID);
+            gv_Favorites.PageIndex = e.NewPageIndex;
+            gv_Favorites.DataBind();
+        }
+
+        protected void gv_Favorites_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Delete")
+            {
+                DTO.FavFood food = new DTO.FavFood();
+                int index = Convert.ToInt32(e.CommandArgument);
+                food.User_ID = ((DTO.User)Session["CurrentUser"]).UserID;
+                food.Food_ID = Convert.ToInt32(gv_Favorites.DataKeys[index]["Food_ID"]);
+                food.Rest_ID = Convert.ToInt32(gv_Favorites.DataKeys[index]["Rest_ID"]);
+
+                DAL.FavFood.DeleteFavoriteFood(food);
+            }
+
+            Page.Response.Redirect(Page.Request.Url.ToString(), true);
         }
     }
 }

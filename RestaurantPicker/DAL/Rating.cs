@@ -136,8 +136,5 @@ namespace DAL
 
             return dt;
         }
-        //public static DataTable GetUserRatings() {
-
-        //}
     }
 }

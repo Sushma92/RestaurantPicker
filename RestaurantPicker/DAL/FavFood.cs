@@ -9,8 +9,29 @@ using System.Data.SqlClient;
 
 namespace DAL
 {
-    class FavFood
+    public class FavFood
     {
+        public static DataTable GetAllFoods()
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandText = "SELECT Food_ID, Name FROM Food";
+
+                    connection.Open();
+                    using (SqlDataAdapter adapter = new SqlDataAdapter())
+                    {
+                        adapter.SelectCommand = command;
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+
+            return dt;
+        }
         public static bool SubmitFavFood(DTO.FavFood food)
         {
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
@@ -18,11 +39,12 @@ namespace DAL
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;
-                    command.CommandText = "INSERT INTO Favorite_Food (User_ID, Food_ID, Rest_ID, ZipCode, Street) VALUES (@User_ID,@Food_ID, @Rest_ID, @ZipCode, @Street)";
+                    //command.CommandText = "INSERT INTO Favorite_Food (User_ID, Food_ID, Rest_ID, ZipCode, Street) VALUES (@User_ID,@Food_ID, @Rest_ID, @ZipCode, @Street)";
+                    command.CommandText = "INSERT INTO Favorite_Food (User_ID, Food_ID, Rest_ID) VALUES (@User_ID,@Food_ID, @Rest_ID)";
                     command.Parameters.Add("@User_ID", SqlDbType.Int).Value = food.User_ID;
                     command.Parameters.Add("@Rest_ID", SqlDbType.Int).Value = food.Rest_ID;
-                    command.Parameters.Add("@ZipCode", SqlDbType.NVarChar).Value = food.ZipCode;
-                    command.Parameters.Add("@Street", SqlDbType.NVarChar).Value = food.Street;
+                    //command.Parameters.Add("@ZipCode", SqlDbType.NVarChar).Value = food.ZipCode;
+                    //command.Parameters.Add("@Street", SqlDbType.NVarChar).Value = food.Street;
                     command.Parameters.Add("@Food_ID", SqlDbType.Int).Value = food.Food_ID;                    
 
                     connection.Open();
@@ -37,6 +59,31 @@ namespace DAL
                 }
             }
             return true;
+        }
+
+        public static void DeleteFavoriteFood(DTO.FavFood food)
+        {
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandText = "DELETE FROM Favorite_Food WHERE User_ID=@UserID AND Food_ID=@FoodID AND Rest_ID = @RestID";
+                    command.Parameters.Add("@UserID", SqlDbType.Int).Value = food.User_ID;
+                    command.Parameters.Add("@RestID", SqlDbType.Int).Value = food.Rest_ID;
+                    command.Parameters.Add("@FoodID", SqlDbType.Int).Value = food.Food_ID;
+                    
+                    connection.Open();
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Unable to delete favorite food");
+                    }
+                }
+            }
         }
 
         public static bool HasFavFood(DTO.FavFood favfood)
@@ -61,9 +108,6 @@ namespace DAL
             return HasFav;
         }
 
-        //FoodName,RestName,ZipCode, Street
-
-
         public static DataTable GetUserFavFood(Int32 user_id)//, string zipcode, string street)
         {
             DataTable dt = new DataTable();
@@ -72,10 +116,8 @@ namespace DAL
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;
-                    command.CommandText = "SELECT DISTINCT Food.Name, Favorite_Food.Street, Favorite_Food.ZipCode, Rest_Name FROM Favorite_Food FULL JOIN [Restaurant_Branch] ON Restaurant_Branch.Rest_ID = Favorite_Food.Rest_ID FULL JOIN Main_Restaurant ON Restaurant_Branch.Rest_ID = Main_Restaurant.Rest_ID FULL JOIN Food.Food_ID ON Favorite_Food.Food_ID WHERE User_ID = @UserID";
+                    command.CommandText = "SELECT DISTINCT Main_Restaurant.Rest_ID, Food.Food_ID, Food.Name, Favorite_Food.Street, Favorite_Food.ZipCode, Rest_Name FROM Favorite_Food FULL JOIN [Restaurant_Branch] ON Restaurant_Branch.Rest_ID = Favorite_Food.Rest_ID FULL JOIN Main_Restaurant ON Restaurant_Branch.Rest_ID = Main_Restaurant.Rest_ID FULL JOIN Food ON Favorite_Food.Food_ID = Food.Food_ID WHERE User_ID = @UserID";
                     command.Parameters.Add("@UserID", SqlDbType.Int).Value = user_id;
-                    //command.Parameters.Add("@Zip", SqlDbType.NVarChar).Value = zipcode;
-                    //command.Parameters.Add("@Street", SqlDbType.NVarChar).Value = street;
 
                     connection.Open();
                     using (SqlDataAdapter adapter = new SqlDataAdapter())

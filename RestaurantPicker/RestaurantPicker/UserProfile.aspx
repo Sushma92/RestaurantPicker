@@ -172,16 +172,37 @@
             </div>
         </div>
         <div class="tab-pane fade" id="favorites" role="tabpanel" aria-labelledby="Favorites">
-            <table class="table">
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col">Favorite Food</th>
-                  <th scope="col">Restaurant Name</th>
-                  <th scope="col">Street</th>
-                  <th scope="col">Zipcode</th>
-                </tr>
-              </thead>
-           </table>
+            <br />
+            <div class="col-md-10 offset-md-1">
+                <div class="card">
+                    <div class="card-header">
+                        <span>
+                            <asp:Label ID="lbl_faveFood" runat="server" Text="Favorite Foods"></asp:Label>
+                            <asp:Button ID="btn_AddFaveFood" runat="server" CssClass="btn btn-info float-right" Text="Add a New Favorite Food" OnClick="btn_AddFaveFood_Click" />
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+                            <ContentTemplate>
+                                <asp:GridView ID="gv_Favorites" runat="server" CssClass="table table-striped" 
+                                    HeaderStyle-CssClass="thead-light" AutoGenerateColumns="false"
+                                     AllowPaging="true" OnPageIndexChanging="gv_Favorites_PageIndexChanging" OnRowCommand="gv_Favorites_RowCommand"
+                                     DataKeyNames="Rest_ID, Food_ID">
+                                    <Columns>
+                                        <asp:BoundField HeaderText="Name" DataField="Name" />
+                                        <asp:BoundField HeaderText="Restaurant" DataField="Rest_Name" />
+                                        <asp:ButtonField CommandName="Delete" Text="Remove Favorite" />
+                                    </Columns>
+                                    <EmptyDataTemplate>
+                                        This user hasn't picked any favorite foods yet!
+                                    </EmptyDataTemplate>
+                                </asp:GridView>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </div>
+                </div>
+                
+            </div>
         </div>
         <div class="tab-pane fade" id="ratings" role="tabpanel" aria-labelledby="Ratings">
             <br /> 
@@ -245,13 +266,63 @@
                 </ContentTemplate>
             </asp:UpdatePanel>
         </div>
-        <asp:UpdatePanel ID="UpdatePanel3" runat="server">
-            <ContentTemplate>
-                <asp:HiddenField ID="HiddenValue" runat="server" Value="0"></asp:HiddenField>
-            </ContentTemplate>
-        </asp:UpdatePanel>
-        
     </div>
+
+    <div class="modal fade bd-example-modal-lg" id="FaveFoodModal" role="dialog" aria-labelledby="FaveFoodModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <asp:UpdatePanel ID="UpdatePanel7" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
+                <ContentTemplate>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title"><asp:Label ID="Label7" runat="server" Text="Add Favorite Food"></asp:Label></h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <asp:ValidationSummary ID="ValidationSummary2" ValidationGroup="EditProfileSummary" runat="server" />
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h6>Select a favorite food (and optionally where you ate it)</h6>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <asp:Label ID="Label8" runat="server" Text="Favorite Food"></asp:Label>
+                                </div>
+                                <div class="col-md-8">
+                                    <asp:DropDownList ID="ddl_FoodOptions" runat="server"></asp:DropDownList>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <asp:Label ID="Label9" runat="server" Text="Restaurant"></asp:Label>
+                                </div>
+                                <div class="col-md-8">
+                                    <asp:DropDownList ID="ddl_Restaurants" runat="server">
+                                        <asp:ListItem Selected="True" Value="0">--</asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <asp:Button ID="btn_AddFavoriteFood" runat="server" CssClass="btn btn-success" Text="Add" OnClick="btn_AddFavoriteFood_Click" ValidationGroup="" />
+                            <button class="btn btn-info" data-dismiss="modal" aria-hidden="true">Close</button>
+                        </div>
+                    </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </div>
+        </div>
+
+    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+        <ContentTemplate>
+            <asp:HiddenField ID="HiddenValue" runat="server" Value="0"></asp:HiddenField>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+        
     <script>
         $('#profiletabs a[href="' + $("#<%= HiddenValue.ClientID %>").val() + '"]').tab('show');
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {

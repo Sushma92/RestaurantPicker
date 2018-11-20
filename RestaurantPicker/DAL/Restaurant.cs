@@ -80,6 +80,27 @@ namespace DAL
             return dt;
         }
 
+        public static DataTable GetDistinctRestaurants()
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandText = "SELECT DISTINCT Rest_ID, Rest_Name FROM Main_Restaurant";
+
+                    connection.Open();
+                    using (SqlDataAdapter adapter = new SqlDataAdapter())
+                    {
+                        adapter.SelectCommand = command;
+                        adapter.Fill(dt);
+                    }
+                }
+            }
+            return dt;
+        }
+
         public static DTO.Restaurant GetRestaurant(int RestID, string zipcode, string street)
         {
             DTO.Restaurant restaurant = new DTO.Restaurant();
