@@ -8,7 +8,7 @@ namespace DTO
 {
     public class User
     {
-        public Int16 UserID { get; set; }
+        public Int32 UserID { get; set; }
         public String Fname { get; set; }
         public String Lname { get; set; }
         public String Email { get; set; }

@@ -78,17 +78,17 @@
                                 <div class="card">
                                     <div class="card-header">
                                         <div class="float-left">
-                                             <%#Eval("Fname")%> <%#Eval("Lname")%>
+                                                <%#Tools.Security.EncodeString(Eval("Fname").ToString())%> <%#Tools.Security.EncodeString(Eval("Lname").ToString())%>
                                         </div>
-                                        <div class="float-right"><%#Eval("Rating")%></div>
+                                        <div class="float-right"><%#Tools.Security.EncodeString(Eval("Rating").ToString())%></div>
                                     </div>
-                                    <div class="card-body"><%#Eval("Review") %></div>
+                                    <div class="card-body"><%#Tools.Security.EncodeString(Eval("Review").ToString()) %></div>
                                 </div>
                             </div>
                         </ItemTemplate>
                         <FooterTemplate>
                             <asp:Label ID="defaultItem" runat="server" 
-                                Visible='<%# Repeater1.Items.Count == 0 %>' Text="Sorry! No reviews have been left for this restaurant yet!\n" />
+                                Visible='<%# Repeater1.Items.Count == 0 %>' Text="Sorry! No reviews have been left for this restaurant yet!" />
                         </FooterTemplate>
                     </asp:Repeater>
                 </div>
@@ -106,10 +106,14 @@
                         </div>
                         <div class="modal-body">
                             <div class="row">
+                                <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="ModalValidation" />
+                            </div>
+                            <div class="row">
                                 <div class="col-md-2">
                                     <asp:Label ID="Label6" runat="server" Text="Rating "></asp:Label>
                                 </div>
                                 <div class="col-md-10">
+                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" Text="*" ForeColor="Red" ControlToValidate="RadioButtonList1" ValidationGroup="ModalValidation" ErrorMessage="Rating is a required field."></asp:RequiredFieldValidator>
                                     <asp:RadioButtonList ID="RadioButtonList1" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow">
                                         <asp:ListItem Text="5" Value="5"></asp:ListItem>
                                         <asp:ListItem Text="4" Value="4"></asp:ListItem>
@@ -128,7 +132,7 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <asp:Button ID="btn_SubmitReview" runat="server" Text="Submit" OnClick="btn_SubmitReview_Click" UseSubmitBehavior="false" data-dismiss="modal" />
+                            <asp:Button ID="btn_SubmitReview" runat="server" CssClass="btn btn-success" Text="Submit" OnClick="btn_SubmitReview_Click" ValidationGroup="ModalValidation" />
                             <button class="btn btn-info" data-dismiss="modal" aria-hidden="true">Close</button>
                         </div>
                     </div>
@@ -137,4 +141,6 @@
         </div>
     </div>
     <br />
+    <script>
+    </script>
 </asp:Content>

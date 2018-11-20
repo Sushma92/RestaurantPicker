@@ -56,13 +56,8 @@
                     </asp:UpdatePanel>
                 </div>
                 <div class="card-footer">
-                    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
-                        <ContentTemplate>
-                            <asp:Button ID="btn_SearchRestaurants" CssClass="btn btn-success" runat="server" Text="Search" OnClick="btn_SearchRestaurants_Click" />
-                            <asp:Button ID="btn_ResetSearch" runat="server" CssClass="btn btn-danger" Text="Reset" OnClick="btn_ResetSearch_Click" />
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                    
+                    <asp:Button ID="btn_SearchRestaurants" CssClass="btn btn-success" runat="server" Text="Search" OnClick="btn_SearchRestaurants_Click" />
+                    <asp:Button ID="btn_ResetSearch" runat="server" CssClass="btn btn-danger" Text="Reset" OnClick="btn_ResetSearch_Click" />
                 </div>
             </div>
         </div>
