@@ -48,7 +48,7 @@ namespace DAL
                 {
                     command.Connection = connection;
                     command.CommandText = "SELECT User_ID FROM Favorite_Food WHERE User_ID = @UserID";
-                    command.Parameters.Add("@UserID", SqlDbType.Int).Value = favfood.UserID;
+                    command.Parameters.Add("@UserID", SqlDbType.Int).Value = favfood.User_ID;
                     
                     connection.Open();
                     var result = command.ExecuteScalar();
