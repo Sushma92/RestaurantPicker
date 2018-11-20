@@ -51,7 +51,6 @@ namespace RestaurantPicker
         protected void btn_Review_Click(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(Page, Page.GetType(), "ReviewModal", "$('#ReviewModal').modal();", true);
-            //UpdatePanel1.Update();
         }
 
         protected void btn_SubmitReview_Click(object sender, EventArgs e)
@@ -64,8 +63,12 @@ namespace RestaurantPicker
             rating.StarRating = Convert.ToInt32(RadioButtonList1.SelectedValue);
             rating.Review = tb_Review.Text;
 
-            if(DAL.Rating.SubmitRating(rating))
+            if (DAL.Rating.SubmitRating(rating))
+            {
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "ReviewModal", "$('#ReviewModal').modal('hide');", true);
+                Page.Response.Redirect(Page.Request.Url.ToString(), true);
+            }
+                
         }
     }
 }

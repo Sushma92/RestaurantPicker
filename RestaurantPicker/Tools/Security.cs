@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Tools
 {
@@ -20,6 +22,10 @@ namespace Tools
                 hash.Append(bytes[i].ToString("x2"));
             }
             return hash.ToString();
+        }
+        public static string EncodeString(string input)
+        {
+            return HttpUtility.HtmlEncode(input);
         }
     }
 }

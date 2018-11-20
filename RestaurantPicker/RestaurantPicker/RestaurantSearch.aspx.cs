@@ -11,9 +11,12 @@ namespace RestaurantPicker
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            gv_Restaurants.DataSource = DAL.Restaurant.GetAllRestaurants();
-            //gv_Restaurants.ID = "Rest_ID";
-            gv_Restaurants.DataBind();
+            if (!IsPostBack)
+            {
+                gv_Restaurants.DataSource = DAL.Restaurant.GetAllRestaurants();
+                //gv_Restaurants.ID = "Rest_ID";
+                gv_Restaurants.DataBind();
+            }
         }
 
         protected List<String> SetFilters()

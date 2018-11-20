@@ -4,11 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CIL
+namespace DTO
 {
     public class Rating
     {
-        float StarRating { get; set; }
-        String Review { get; set; }
+        public Int32 UserID { get; set; }
+        public Int32 Rest_ID { get; set; }
+        public String Street { get; set; }
+        public String ZipCode { get; set; }
+        public float StarRating { get; set; }
+        public String Review { get; set; }
     }
 }

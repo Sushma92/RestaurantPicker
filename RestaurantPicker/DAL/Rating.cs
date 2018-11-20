@@ -60,6 +60,35 @@ namespace DAL
             return rating;
         }
 
+        public static bool SubmitRating(DTO.Rating rating)
+        {
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connectionString"].ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandText = "INSERT INTO Rating (User_ID, Rest_ID, ZipCode, Street, Rating, Review) VALUES (@UserID, @RestID, @ZipCode, @Street, @Rating, @Review)";
+                    command.Parameters.Add("@UserID", SqlDbType.Int).Value = rating.UserID;
+                    command.Parameters.Add("@RestID", SqlDbType.Int).Value = rating.Rest_ID;
+                    command.Parameters.Add("@ZipCode", SqlDbType.NVarChar).Value = rating.ZipCode;
+                    command.Parameters.Add("@Street", SqlDbType.NVarChar).Value = rating.Street;
+                    command.Parameters.Add("@Rating", SqlDbType.Int).Value = rating.StarRating;
+                    command.Parameters.Add("@Review", SqlDbType.NVarChar).Value = rating.Review;
+
+                    connection.Open();
+                    try
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Unable to insert review");
+                    }
+                }
+            }
+            return true;
+        }
+
         //public static DataTable GetUserRatings() {
 
         //}

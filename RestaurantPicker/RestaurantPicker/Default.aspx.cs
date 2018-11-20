@@ -14,7 +14,10 @@ namespace RestaurantPicker
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                Label1.Visible = false;
+            }
         }
 
         protected void btn_Continue_Click(object sender, EventArgs e)
@@ -31,18 +34,20 @@ namespace RestaurantPicker
                 Response.Redirect("~/RestaurantSearch.aspx");
             }
             else
-                Response.Redirect("~/Default.aspx");
+            {
+                Label1.Visible = true;
+            }
         }
 
         protected void btn_Register_Click(object sender, EventArgs e)
         {
-            if (tb_Fname.Text == "" || tb_Lname.Text == "" || tb_Email.Text == "" || tb_Password1.Text == "" || tb_Password2.Text == "")
-                Console.Write("Please enter all the fields");
+            //if (tb_Fname.Text == "" || tb_Lname.Text == "" || tb_Email.Text == "" || tb_Password1.Text == "" || tb_Password2.Text == "")
+            //    Console.Write("Please enter all the fields");
 
-            else if (tb_Password1.Text != tb_Password2.Text)
-               Console.Write("The password does not match");
-            else
-                DAL.User.Register(tb_Fname.Text, tb_Lname.Text, tb_Email.Text, tb_Password1.Text, tb_Password2.Text);
+            //else if (tb_Password1.Text != tb_Password2.Text)
+            //    Console.Write("The password does not match");
+            //else
+            DAL.User.Register(tb_Fname.Text, tb_Lname.Text, tb_Email.Text, tb_Password1.Text, tb_Password2.Text);
         }
     }
 }

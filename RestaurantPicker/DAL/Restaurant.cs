@@ -81,7 +81,7 @@ namespace DAL
                 using (SqlCommand command = new SqlCommand())
                 {
                     command.Connection = connection;
-                    command.CommandText = "SELECT TOP 1 Rest_Name, Web_Link, ZipCode, Street, City, State FROM Restaurant_Branch FULL JOIN Main_Restaurant ON Restaurant_Branch.Rest_ID = Main_Restaurant.Rest_ID WHERE Restaurant_Branch.Rest_ID = @ID AND ZipCode = @ZipCode AND Street = @Street ";
+                    command.CommandText = "SELECT TOP 1 Rest_Name, Web_Link, ZipCode, Street, City, State FROM Restaurant_Branch FULL JOIN Main_Restaurant ON Restaurant_Branch.Rest_ID = Main_Restaurant.Rest_ID WHERE Restaurant_Branch.Rest_ID = @ID AND ZipCode = @ZipCode AND Street = @Street";
                     command.Parameters.Add("@ID", System.Data.SqlDbType.Int).Value = RestID;
                     command.Parameters.Add("@ZipCode", System.Data.SqlDbType.NVarChar).Value = zipcode;
                     command.Parameters.Add("@Street", System.Data.SqlDbType.NVarChar).Value = street;
@@ -90,6 +90,7 @@ namespace DAL
                     SqlDataReader reader = command.ExecuteReader();
                     if (reader.Read())
                     {
+                        restaurant.Rest_ID = RestID;
                         restaurant.Rest_Name = reader["Rest_Name"].ToString();//(reader["Rest_Name"] != null) ? reader["Rest_Name"].ToString() : "";
                         restaurant.Web_Link = reader["Web_Link"].ToString();//(reader["Web_Link"] != null) ? reader["Web_Link"].ToString() : "";
                         restaurant.ZipCode = (reader["ZipCode"] != null) ? reader["ZipCode"].ToString() : "";
