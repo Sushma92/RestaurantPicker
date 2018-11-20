@@ -11,21 +11,15 @@ namespace RestaurantPicker
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            DTO.User user = DAL.User.GetUser(1);
-            Button login = (Button)Master.FindControl("btn_Login");
-            if (login != null)
+            if (Session["CurrentUser"] != null)
             {
-                login.Visible = false;
-                
+                DTO.User user = (DTO.User)Session["CurrentUser"];
+                lbl_FirstName.Text = user.Fname;
+                lbl_LastName.Text = user.Lname;
+                lbl_Email.Text = user.Email;
+                lbl_Zip.Text = (user.Zipcode == "") ? "N/A" : user.Zipcode;
             }
             
-            
-            lbl_Greeting.Text = "Welcome, " + user.Fname + "!";
-
-            lbl_FirstName.Text = user.Fname;
-            lbl_LastName.Text = user.Lname;
-            lbl_Email.Text = user.Email;
-            lbl_Zip.Text = (user.Zipcode == "") ? "N/A" : user.Zipcode;
         }
     }
 }

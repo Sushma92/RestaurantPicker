@@ -14,8 +14,6 @@ namespace RestaurantPicker
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            DTO.User user = DAL.User.GetUser(2);
-            //Label1.Text = user.Fname;
 
         }
 
